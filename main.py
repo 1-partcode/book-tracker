@@ -20,6 +20,12 @@ def add_book(books):
     print("\n--- Добавить книгу ---")
     title = input("Название: ").strip()
     author = input("Автор: ").strip()
+
+    for b in books:
+        if b["title"].lower() == title.lower() and b["author"].lower() == author.lower():
+            print("Такая книга уже есть в списке!")
+            return books
+
     while True:
         try:
             rating = int(input("Оценка (1-5): "))
