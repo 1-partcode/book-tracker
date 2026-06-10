@@ -71,6 +71,26 @@ def author_stats(books):
         print(f"  {author}: {count} кн.")
 
 
+def delete_book(books):
+    print("\n--- Удалить книгу ---")
+    if not books:
+        print("Список пуст")
+        return books
+    for i, b in enumerate(books, 1):
+        print(f"{i}. «{b['title']}» — {b['author']}")
+    try:
+        idx = int(input("Введите номер книги для удаления: ")) - 1
+        if 0 <= idx < len(books):
+            removed = books.pop(idx)
+            save_books(books)
+            print(f'Удалена: «{removed["title"]}»')
+        else:
+            print("Неверный номер")
+    except ValueError:
+        print("Введите число")
+    return books
+
+
 def main():
     books = load_books()
     while True:
@@ -90,6 +110,8 @@ def main():
             average_rating(books)
         elif choice == "4":
             author_stats(books)
+        elif choice == "5":
+            books = delete_book(books)
         elif choice == "6":
             print("Пока!")
             break
